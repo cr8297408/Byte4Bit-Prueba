@@ -1,9 +1,10 @@
-const express = require("express");
-const cors = require("cors");
-const swaggerUI = require("swagger-ui-express");
-const swaggerJsDoc = require("swagger-jsdoc");
+const express = require('express');
+const cors = require('cors');
+// const swaggerUI = require("swagger-ui-express");
+// const swaggerJsDoc = require("swagger-jsdoc");
 
-const config = require("../env");
+const config = require('../env');
+const { router } = require('../../routes');
 // const swaggerDoc = require("../swagger");
 // const expressJWT = require("../JWT");
 
@@ -18,10 +19,10 @@ app.use(cors());
 // app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpecs));
 // app.use(expressJWT);
 
-const port = config.port;
+const { port } = config;
 
-app.use(Routes);
+app.use(router);
 
-app.set("port", port);
+app.set('port', port);
 
 module.exports = app;
