@@ -1,11 +1,12 @@
-const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
-
 const { Op } = require('sequelize');
+const boom = require('@hapi/boom');
+const bcrypt = require('bcrypt');
+
 const { User } = require('../../database/models/user.model');
-const config = require('../../config/env');
-const { template } = require('../../utils/templates');
 const { sendMail } = require('../../utils/send-email');
+const { template } = require('../../utils/templates');
+const config = require('../../config/env');
 
 const AuthService = {
 
@@ -20,7 +21,7 @@ const AuthService = {
     });
 
     if (validateUser) {
-      throw new Error('usuario o email en uso...');
+      throw boom.badRequest('usuario o email en uso...');
     }
     const dataUser = {
       email: body.email,
@@ -48,11 +49,11 @@ const AuthService = {
     });
 
     if (!user) {
-      throw new Error('credenciales incorrectas');
+      throw boom.badRequest('credenciales incorrectas');
     }
     const result = bcrypt.compareSync(body.password, user.password);
     if (!result) {
-      throw new Error('credenciales incorrectas');
+      throw boom.badRequest('credenciales incorrectas');
     }
     const dataToken = {
       id: user.id,
@@ -73,7 +74,7 @@ const AuthService = {
     });
 
     if (!user) {
-      throw new Error(message);
+      throw boom.notFound('User Not Found');
     }
 
     const dataToken = {
@@ -110,7 +111,7 @@ const AuthService = {
       });
 
       if (user.recovery !== bearerHeader) {
-        throw new Error('no authorized');
+        throw boom.unauthorized('no authorized');
       }
 
       const newpass = bcrypt.hashSync(password, 10);

@@ -2,6 +2,7 @@
 	"conventionalCommits.scopes": [
 		"database",
 		"endpoints",
-		"routes"
+		"routes",
+		"validations"
 	]
 }

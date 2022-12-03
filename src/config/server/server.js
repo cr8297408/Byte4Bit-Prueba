@@ -6,6 +6,7 @@ const swaggerJsDoc = require('swagger-jsdoc');
 const config = require('../env');
 const { router } = require('../../routes');
 const swaggerDoc = require('../swagger');
+const { boomErrorHandler, errorHandler } = require('../../middlewares/error-handler');
 // const expressJWT = require("../JWT");
 
 const app = express();
@@ -20,6 +21,8 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpecs));
 const { port } = config;
 
 app.use(router);
+app.use(boomErrorHandler);
+app.use(errorHandler);
 
 app.set('port', port);
 
