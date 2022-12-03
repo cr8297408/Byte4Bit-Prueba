@@ -1,6 +1,7 @@
 {
 	"conventionalCommits.scopes": [
 		"database",
-		"endpoints"
+		"endpoints",
+		"routes"
 	]
 }
