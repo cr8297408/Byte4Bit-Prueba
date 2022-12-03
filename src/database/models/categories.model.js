@@ -1,5 +1,7 @@
 const { DataTypes, UUIDV4 } = require('sequelize');
 const database = require('../connection');
+const { FilmCategorie } = require('./film-categorie.model');
+const { Film } = require('./film.model');
 const { USERS_TABLE, User } = require('./user.model');
 
 const CATEGORIES_TABLE = 'categories';
@@ -32,8 +34,8 @@ const Categorie = database.define(
   },
 );
 
-User.hasMany(Categorie);
-Categorie.belongsTo(User);
+Film.belongsToMany(Categorie, { through: FilmCategorie, as: 'categories' });
+Categorie.belongsToMany(Film, { through: FilmCategorie, as: 'films' });
 
 module.exports = {
   Categorie,

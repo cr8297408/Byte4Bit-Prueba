@@ -1,5 +1,6 @@
 const { UUIDV4 } = require('sequelize');
 const { FILMS_TABLE } = require('../models/film.model');
+const { USERS_TABLE } = require('../models/user.model');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -17,6 +18,15 @@ module.exports = {
       gender: {
         type: Sequelize.DataTypes.STRING(15),
         allowNull: false,
+      },
+      createdBy: {
+        type: Sequelize.DataTypes.STRING,
+        field: 'created_by',
+        allowNull: false,
+        references: {
+          model: USERS_TABLE,
+          key: 'id',
+        },
       },
       createdAt: {
         type: Sequelize.DataTypes.STRING,

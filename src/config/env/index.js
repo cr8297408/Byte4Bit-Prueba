@@ -11,6 +11,7 @@ const development = {
 
   JWT_SECRET: process.env.JWT_SECRET,
   JWT_PASS_SECRET: process.env.JWT_PASS_SECRET,
+  JWT_ALGORITHMS: process.env.JWT_ALGORITHMS,
 
   URL_SWAGGER: process.env.URL_SWAGGER,
 

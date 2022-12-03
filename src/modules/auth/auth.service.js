@@ -56,13 +56,10 @@ const AuthService = {
       throw boom.badRequest('credenciales incorrectas');
     }
     const dataToken = {
-      id: user.id,
-      isAdmin: user.isAdmin,
-      isActive: user.isActive,
-      typeUser: user.typeUser,
+      id: user.id
     };
 
-    const token = jsonwebtoken.sign({ dataToken }, config.JWT_SECRET);
+    const token = jsonwebtoken.sign(dataToken, config.JWT_SECRET);
     return token;
   },
 

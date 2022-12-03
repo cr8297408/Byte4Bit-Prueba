@@ -6,23 +6,23 @@ const swaggerJsDoc = require('swagger-jsdoc');
 const config = require('../env');
 const { router } = require('../../routes');
 const swaggerDoc = require('../swagger');
-const { boomErrorHandler, errorHandler } = require('../../middlewares/error-handler');
-// const expressJWT = require("../JWT");
+const { boomErrorHandler, errorHandler, jwtErrorHandler } = require('../../middlewares/error-handler');
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
+
 const swaggerSpecs = swaggerJsDoc(swaggerDoc);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpecs));
-// app.use(expressJWT);
 
 const { port } = config;
 
 app.use(router);
 app.use(boomErrorHandler);
 app.use(errorHandler);
+app.use(jwtErrorHandler);
 
 app.set('port', port);
 

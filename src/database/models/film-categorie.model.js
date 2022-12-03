@@ -1,10 +1,10 @@
 const { DataTypes } = require('sequelize');
 const database = require('../connection');
 const { CATEGORIES_TABLE } = require('./categories.model');
-const { FILMS_TABLE } = require('./film.model');
+const { FILMS_TABLE, Film } = require('./film.model');
 
 const FILM_CATEGORIE_TABLE = 'film_categories_table';
-const FilmCategorieTable = database.define(
+const FilmCategorie = database.define(
   'FilmCategorieTable',
   {
     categorieId: {
@@ -33,6 +33,6 @@ const FilmCategorieTable = database.define(
 );
 
 module.exports = {
-  FilmCategorieTable,
+  FilmCategorie,
   FILM_CATEGORIE_TABLE,
 };

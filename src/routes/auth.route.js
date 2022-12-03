@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { validateJoi } = require('../middlewares/validate-joi');
-const AuthComponent = require('../modules/auth/index');
+const AuthController = require('../modules/auth/index');
 const {
   registerSchema, loginSchema, forgotPassSchema, newPassSchema,
 } = require('../modules/auth/validation');
@@ -26,7 +26,7 @@ const router = Router();
   *              401:
   *                  description: user exists
   */
-router.post('/sign-in', validateJoi(loginSchema, 'body'), AuthComponent.signIn);
+router.post('/sign-in', validateJoi(loginSchema, 'body'), AuthController.signIn);
 
 /**
   * @swagger
@@ -47,7 +47,7 @@ router.post('/sign-in', validateJoi(loginSchema, 'body'), AuthComponent.signIn);
   *              401:
   *                  description: user exists
   */
-router.post('/sign-up', validateJoi(registerSchema, 'body'), AuthComponent.signUp);
+router.post('/sign-up', validateJoi(registerSchema, 'body'), AuthController.signUp);
 
 /**
   * @swagger
@@ -68,7 +68,7 @@ router.post('/sign-up', validateJoi(registerSchema, 'body'), AuthComponent.signU
   *              401:
   *                  description: user exists
   */
-router.post('/forgot-password', validateJoi(forgotPassSchema, 'body'), AuthComponent.forgotPassword);
+router.post('/forgot-password', validateJoi(forgotPassSchema, 'body'), AuthController.forgotPassword);
 
 /**
   * @swagger
@@ -89,7 +89,7 @@ router.post('/forgot-password', validateJoi(forgotPassSchema, 'body'), AuthCompo
   *              401:
   *                  description: user exists
   */
-router.post('/new-password', validateJoi(newPassSchema, 'body'), AuthComponent.newPassword);
+router.post('/new-password', validateJoi(newPassSchema, 'body'), AuthController.newPassword);
 
 /**
   * @swagger

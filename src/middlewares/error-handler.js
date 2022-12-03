@@ -21,6 +21,7 @@ async function errorHandler(req, res, error) {
  * @param {*} next
  */
 async function boomErrorHandler(error, req, res, next) {
+  console.log('🚀 ~ file: error-handler.js:25 ~ boomErrorHandler ~ error', error);
   if (!error.isBoom) {
     next(error);
   }
@@ -30,7 +31,17 @@ async function boomErrorHandler(error, req, res, next) {
   res.status(output.statusCode).json(output.payload);
 }
 
+function jwtErrorHandler(err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    const error = boom.unauthorized('invalid token...');
+    next(error);
+  }
+  
+  next(err)
+}
+
 module.exports = {
   errorHandler,
   boomErrorHandler,
+  jwtErrorHandler,
 };
