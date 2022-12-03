@@ -5,7 +5,7 @@ const router = Router();
 
 /**
   * @swagger
-  *  /v1/auth/signIn:
+  *  /v1/auth/sign-in:
   *      post:
   *          summary: login users
   *          security: [] # No security
@@ -22,11 +22,11 @@ const router = Router();
   *              401:
   *                  description: user exists
   */
-router.post('/signIn', AuthComponent.signIn);
+router.post('/sign-in', AuthComponent.signIn);
 
 /**
   * @swagger
-  *  /v1/auth/signUp:
+  *  /v1/auth/sign-up:
   *      post:
   *          summary: sign up users
   *          security: [] # No security
@@ -43,7 +43,49 @@ router.post('/signIn', AuthComponent.signIn);
   *              401:
   *                  description: user exists
   */
-router.post('/signUp', AuthComponent.signUp);
+router.post('/sign-up', AuthComponent.signUp);
+
+/**
+  * @swagger
+  *  /v1/auth/forgot-password:
+  *      post:
+  *          summary: forgot password users
+  *          security: [] # No security
+  *          tags: ["Auths"]
+  *          requestBody:
+  *              required: true
+  *              content:
+  *                  application/json:
+  *                      schema:
+  *                          $ref: '#/components/schemas/forgotPass'
+  *          responses:
+  *              200:
+  *                  description: forgot password succesfully
+  *              401:
+  *                  description: user exists
+  */
+router.post('/forgot-password', AuthComponent.forgotPassword);
+
+/**
+  * @swagger
+  *  /v1/auth/new-password:
+  *      post:
+  *          summary: new password users
+  *          security: [] # No security
+  *          tags: ["Auths"]
+  *          requestBody:
+  *              required: true
+  *              content:
+  *                  application/json:
+  *                      schema:
+  *                          $ref: '#/components/schemas/newPass'
+  *          responses:
+  *              200:
+  *                  description: new password succesfully
+  *              401:
+  *                  description: user exists
+  */
+router.post('/new-password', AuthComponent.newPassword);
 
 /**
   * @swagger
@@ -96,15 +138,15 @@ router.post('/signUp', AuthComponent.signUp);
   *      newPass:
   *          type: object
   *          required:
-  *              -newPassword
+  *              -password
   *              -token
   *          properties:
-  *              newPassword:
+  *              password:
   *                  type: string
   *              token:
   *                  type: string
   *          example:
-  *              newPassword: pass1234
+  *              password: pass1234
   *              token: mytokensalsk
   *      Error:
   *          type: object
