@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "build": "babel src -d lib"
+    "build": "babel src -d lib",
+    "migrate": "npx sequelize db:migrate",
+    "desmigrate": "npx sequelize db:migrate:undo:all",
+    "migration:create": "npx sequelize migration:create --name"
   },
   "keywords": [],
   "author": "",
