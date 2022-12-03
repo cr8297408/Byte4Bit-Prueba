@@ -4,6 +4,8 @@ const jsonwebtoken = require('jsonwebtoken');
 const { Op } = require('sequelize');
 const { User } = require('../../database/models/user.model');
 const config = require('../../config/env');
+const { template } = require('../../utils/templates');
+const { sendMail } = require('../../utils/send-email');
 
 const AuthService = {
 
@@ -27,6 +29,16 @@ const AuthService = {
     };
     const createdAuth = await User.create(dataUser);
 
+    const textEmail = 'It is a great honor for us that you choose us to share wonderful movies at this time.';
+    const infoEmail = {
+      from: 'Incredible Watch',
+      emailFrom: config.MAIL_USER,
+      emailTo: body.email,
+      subject: 'Register in Incredible Watch',
+      body: template(body.name, textEmail),
+    };
+
+    await sendMail(infoEmail);
     return createdAuth;
   },
 
@@ -53,49 +65,64 @@ const AuthService = {
     return token;
   },
 
-  // async forgotPassword(email) {
-  //   const message = 'revisa tu email para cambiar la contraseña';
+  async forgotPassword(email) {
+    const message = 'revisa tu email para cambiar la contraseña';
 
-  //   const user = await User.findOne({
-  //     where: { email },
-  //   });
+    const user = await User.findOne({
+      where: { email },
+    });
 
-  //   if (!user) {
-  //     throw new Error(message);
-  //   }
+    if (!user) {
+      throw new Error(message);
+    }
 
-  //   const dataToken = {
-  //     id: user.id,
-  //   };
+    const dataToken = {
+      id: user.id,
+    };
 
-  //   const token = jsonwebtoken.sign({ dataToken }, config.JWT_PASS_SECRET);
+    const token = jsonwebtoken.sign({ dataToken }, config.JWT_PASS_SECRET);
 
-  //   const emailFrom = config.MAIL_USER;
-  //   const emailTo = user.email;
-  //   const subject = 'recuperación contraseña';
-  //   const textPrincipal = `Tu token para cambio de contraseña es: ${token}`;
+    user.update({
+      recovery: token,
+    });
 
-  //   await sendMail('syscomp', emailFrom, emailTo, subject, textPrincipal);
+    const textEmail = `your recovery token is: ${token}`;
+    const emailInfo = {
+      emailFrom: config.MAIL_USER,
+      emailTo: user.email,
+      subject: 'recuperación contraseña',
+      body: template(user.name, textEmail),
+    };
 
-  //   return message;
-  // },
+    await sendMail(emailInfo);
 
-  // async newPassword(newPassword, bearerHeader) {
-  //   const validateToken = jsonwebtoken.decode(bearerHeader, config.JWT_PASS_SECRET);
+    return message;
+  },
 
-  //   if (validateToken) {
-  //     const newpass = bcrypt.hashSync(newPassword, 10);
+  async newPassword(password, bearerHeader) {
+    const validateToken = jsonwebtoken.decode(bearerHeader, config.JWT_PASS_SECRET);
 
-  //     const changePassword = await User.update({
-  //       password: newpass,
-  //     }, {
-  //       where: { id: validateToken.dataToken.id },
-  //     });
+    if (validateToken) {
+      const user = await User.findOne({
+        where: {
+          id: validateToken.dataToken.id,
+        },
+      });
 
-  //     return changePassword;
-  //   }
-  //   return 'token no valid';
-  // },
+      if (user.recovery !== bearerHeader) {
+        throw new Error('no authorized');
+      }
+
+      const newpass = bcrypt.hashSync(password, 10);
+
+      const changePassword = await user.update({
+        password: newpass,
+      });
+
+      return changePassword;
+    }
+    return 'token no valid';
+  },
 
   // async getUserLog(bearerHeader) {
   //   const user = await getUser(bearerHeader);

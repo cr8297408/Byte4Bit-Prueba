@@ -19,25 +19,25 @@ async function signIn(req, res) {
   }
 }
 
-// async function forgotPassword(req, res) {
-//   try {
-//     const { email } = req.body;
-//     const forgotPass = await AuthService.forgotPassword(email);
-//     res.json(forgotPass);
-//   } catch (error) {
-//     res.json(error.message);
-//   }
-// }
+async function forgotPassword(req, res) {
+  try {
+    const { email } = req.body;
+    const forgotPass = await AuthService.forgotPassword(email);
+    res.json(forgotPass);
+  } catch (error) {
+    res.json(error.message);
+  }
+}
 
-// async function newPassword(req, res) {
-//   try {
-//     const { newPassword, token } = req.body;
-//     const newPass = await AuthService.newPassword(newPassword, token);
-//     res.json(newPass);
-//   } catch (error) {
-//     res.json(error.message);
-//   }
-// }
+async function newPassword(req, res) {
+  try {
+    const { password, token } = req.body;
+    const newPass = await AuthService.newPassword(password, token);
+    res.json(newPass);
+  } catch (error) {
+    res.json(error.message);
+  }
+}
 
 // async function getUserAuth(req, res) {
 //   try {
@@ -61,8 +61,8 @@ async function signIn(req, res) {
 
 module.exports = {
   signIn,
-  // forgotPassword,
-  // newPassword,
+  forgotPassword,
+  newPassword,
   // getUserAuth,
   // updateUser,
   signUp,

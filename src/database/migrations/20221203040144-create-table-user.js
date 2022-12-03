@@ -25,6 +25,9 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      recovery: {
+        type: Sequelize.DataTypes.TEXT,
+      },
       createdAt: {
         type: Sequelize.DataTypes.STRING,
         defaultValue: new Date(),

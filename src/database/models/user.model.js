@@ -21,6 +21,9 @@ const User = database.define(
       type: DataTypes.STRING(60),
       allowNull: false,
     },
+    recovery: {
+      type: DataTypes.TEXT,
+    },
     email: {
       type: DataTypes.STRING(35),
       allowNull: false,
@@ -30,7 +33,7 @@ const User = database.define(
   {
     tableName: USERS_TABLE,
     timestamps: true,
-  },
+  }
 );
 
 module.exports = { User, USERS_TABLE };
