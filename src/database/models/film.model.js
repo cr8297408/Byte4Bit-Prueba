@@ -25,8 +25,8 @@ const Film = database.define(
     timestamps: true,
   },
 );
-database.addModel(Film);
 
 module.exports = {
   Film,
+  FILMS_TABLE,
 };

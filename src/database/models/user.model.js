@@ -12,7 +12,7 @@ const User = database.define(
       primaryKey: true,
       allowNull: false,
     },
-    username: {
+    name: {
       type: DataTypes.STRING(12),
       allowNull: false,
       unique: true,
@@ -32,6 +32,5 @@ const User = database.define(
     timestamps: true,
   },
 );
-database.addModel(User);
 
 module.exports = { User, USERS_TABLE };

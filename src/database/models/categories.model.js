@@ -2,9 +2,9 @@ const { DataTypes, UUIDV4 } = require('sequelize');
 const database = require('../connection');
 const { USERS_TABLE, User } = require('./user.model');
 
-const COMMENTS_TABLE = 'comments';
-const Comment = database.define(
-  'Comment',
+const CATEGORIES_TABLE = 'categories';
+const Categorie = database.define(
+  'Categorie',
   {
     id: {
       type: DataTypes.STRING,
@@ -12,8 +12,8 @@ const Comment = database.define(
       primaryKey: true,
       allowNull: false,
     },
-    text: {
-      type: DataTypes.TEXT,
+    name: {
+      type: DataTypes.STRING(12),
       allowNull: false,
     },
     createdBy: {
@@ -27,15 +27,15 @@ const Comment = database.define(
     },
   },
   {
-    tableName: COMMENTS_TABLE,
+    tableName: CATEGORIES_TABLE,
     timestamps: true,
   },
 );
 
-User.hasMany(Comment);
-Comment.belongsTo(User);
+User.hasMany(Categorie);
+Categorie.belongsTo(User);
 
 module.exports = {
-  Comment,
-  COMMENTS_TABLE,
+  Categorie,
+  CATEGORIES_TABLE,
 };
