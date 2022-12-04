@@ -9,15 +9,15 @@ const expressJWT = jwt({
   secret: JWT_SECRET,
   algorithms: [JWT_ALGORITHMS],
 })
-// .unless({
-//   path: [
-//     '/v1/auth/sign-up',
-//     '/v1/auth/sign-in',
-//     '/api-docs',
-//     '/v1/auth/forgot-password',
-//     '/v1/auth/new-password',
-//     '/',
-//   ],
-// });
+.unless({
+  path: [
+    '/v1/auth/sign-up',
+    '/v1/auth/sign-in',
+    '/api-docs',
+    '/v1/auth/forgot-password',
+    '/v1/auth/new-password',
+    '/',
+  ],
+});
 
 module.exports = { expressJWT };

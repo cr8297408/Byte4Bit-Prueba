@@ -1,11 +1,15 @@
 FROM node:16-slim
 
-WORKDIR /app
+RUN mkdir -p /usr/src/app
 
-COPY package.json package-lock.json ./
+WORKDIR /usr/src/app 
+
+COPY package*.json ./
 
 RUN npm install
 
 COPY . .
 
-CMD ["npm", "start"]
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]

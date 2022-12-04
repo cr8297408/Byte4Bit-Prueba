@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  incredible-watch:
+    container_name: watch
+    restart: always
+    build: .
+    ports:
+       - "8080:3000"  
+    volumes:
+      - .:/usr/src/app

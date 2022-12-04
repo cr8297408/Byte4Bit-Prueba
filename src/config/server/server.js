@@ -20,9 +20,9 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpecs));
 const { port } = config;
 
 app.use(router);
+app.use(jwtErrorHandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);
-app.use(jwtErrorHandler);
 
 app.set('port', port);
 

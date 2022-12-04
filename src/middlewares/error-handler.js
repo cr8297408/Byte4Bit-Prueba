@@ -35,9 +35,10 @@ function jwtErrorHandler(err, req, res, next) {
   if (err.name === 'UnauthorizedError') {
     const error = boom.unauthorized('invalid token...');
     next(error);
+  } else {
+    next(err)
   }
   
-  next(err)
 }
 
 module.exports = {

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "build": "babel src -d lib",
+    "build": "sudo docker-compose build",
     "migrate": "npx sequelize db:migrate",
     "desmigrate": "npx sequelize db:migrate:undo:all",
     "migration:create": "npx sequelize migration:create --name"
@@ -24,6 +24,7 @@
     "joi": "^17.7.0",
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.8.0",
+    "nodemon": "^2.0.20",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
     "prettier": "^2.8.0",
