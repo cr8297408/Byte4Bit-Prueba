@@ -4,5 +4,7 @@
 		"endpoints",
 		"routes",
 		"validations"
-	]
+	],
+	"appService.defaultWebAppToDeploy": "/subscriptions/a83a81a4-f33b-435a-abab-71f62dc5d97d/AppServices/subscriptions/a83a81a4-f33b-435a-abab-71f62dc5d97d/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/incrediblewatch",
+	"appService.deploySubpath": "."
 }
