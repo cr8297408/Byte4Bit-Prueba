@@ -16,6 +16,7 @@ module.exports = {
         },
         name: {
           type: Sequelize.DataTypes.STRING(12),
+          unique: true,
           allowNull: false,
         },
         createdBy: {

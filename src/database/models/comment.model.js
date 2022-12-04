@@ -1,6 +1,9 @@
 const { DataTypes, UUIDV4 } = require('sequelize');
-const database = require('../connection');
+
+const { FilmComment } = require('./film-comments.model');
 const { USERS_TABLE, User } = require('./user.model');
+const database = require('../connection');
+const { Film } = require('./film.model');
 
 const COMMENTS_TABLE = 'comments';
 const Comment = database.define(
@@ -16,7 +19,7 @@ const Comment = database.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    createdBy: {
+    UserId: {
       type: DataTypes.STRING,
       field: 'created_by',
       allowNull: false,
@@ -34,6 +37,9 @@ const Comment = database.define(
 
 User.hasMany(Comment);
 Comment.belongsTo(User);
+
+Film.belongsToMany(Comment, { through: FilmComment, as: 'comments' });
+Comment.belongsToMany(Film, { through: FilmComment, as: 'films' });
 
 module.exports = {
   Comment,

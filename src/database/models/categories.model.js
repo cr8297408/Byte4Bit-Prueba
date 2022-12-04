@@ -16,6 +16,7 @@ const Categorie = database.define(
     },
     name: {
       type: DataTypes.STRING(12),
+      unique: true,
       allowNull: false,
     },
     createdBy: {

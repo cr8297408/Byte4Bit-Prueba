@@ -4,10 +4,10 @@ const { COMMENTS_TABLE } = require('./comment.model');
 const { FILMS_TABLE } = require('./film.model');
 
 const FILM_COMMENTS_TABLE = 'film_comments_table';
-const FilmCommentsTable = database.define(
-  'FilmCommentsTable',
+const FilmComment = database.define(
+  'FilmComment',
   {
-    commentId: {
+    CommentId: {
       type: DataTypes.STRING,
       field: 'comment_id',
       allowNull: false,
@@ -16,7 +16,7 @@ const FilmCommentsTable = database.define(
         key: 'id',
       },
     },
-    filmId: {
+    FilmId: {
       type: DataTypes.STRING,
       field: 'film_id',
       allowNull: false,
@@ -33,6 +33,6 @@ const FilmCommentsTable = database.define(
 );
 
 module.exports = {
-  FilmCommentsTable,
+  FilmComment,
   FILM_COMMENTS_TABLE,
 };

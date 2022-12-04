@@ -6,9 +6,9 @@ const createFilmSchema = Joi.object({
   gender: Joi.string().min(4).max(15).messages(stringMessages('gender', 15)),
   categories: Joi.array()
     .items(
-      Joi.string().min(36).max(36).messages(stringMessages('id', 36, 36)),
+      Joi.string().length(36).messages(stringMessages('id', 36, 36)),
     )
-    .max(2),
+    .max(2).required(),
 });
 
 module.exports = {

@@ -7,7 +7,7 @@ const FILM_CATEGORIE_TABLE = 'film_categories_table';
 const FilmCategorie = database.define(
   'FilmCategorieTable',
   {
-    categorieId: {
+    CategorieId: {
       type: DataTypes.STRING,
       field: 'categorie_id',
       allowNull: false,
@@ -16,7 +16,7 @@ const FilmCategorie = database.define(
         key: 'id',
       },
     },
-    filmId: {
+    FilmId: {
       type: DataTypes.STRING,
       field: 'film_id',
       allowNull: false,
