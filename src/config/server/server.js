@@ -5,7 +5,7 @@ const swaggerJsDoc = require('swagger-jsdoc');
 
 const config = require('../env');
 const { router } = require('../../routes');
-const swaggerDoc = require('../swagger');
+const swaggerDoc = require('../../libs/swagger');
 const { boomErrorHandler, errorHandler, jwtErrorHandler } = require('../../middlewares/error-handler');
 
 const app = express();

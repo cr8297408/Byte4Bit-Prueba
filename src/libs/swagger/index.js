@@ -1,4 +1,4 @@
-const config = require('../env/index');
+const config = require('../../config/env/index');
 
 const { URL_SWAGGER } = config;
 
@@ -6,7 +6,7 @@ const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Pos Api',
+      title: 'Incredible Watch Api',
       version: '1.0.0',
     },
     servers: [
