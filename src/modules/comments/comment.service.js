@@ -11,8 +11,9 @@ class CommentService extends BaseService {
 
   async getAll(filters, page, size) {
     if (filters.UserId) {
-      let where = { 'created_by': filters.UserId };
+      let where = {};
 
+      where = applyFilters(filters.UserId, 'created_by', []);
       const response = await super.getAll(where, page, size, {
         all: true
       });

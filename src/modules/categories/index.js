@@ -2,9 +2,9 @@ const CategorieService = require('./categorie.service');
 
 async function getAllCategories(req, res, next) {
   try {
-    const { page, size } = req.query;
+    const { page, size, name } = req.query;
     
-    const categories = await CategorieService.getAll({}, page, size);
+    const categories = await CategorieService.getAll({ name }, page, size);
     res.status(categories.getStatus()).json(categories.getData());
   } catch (error) {
     next(error);
